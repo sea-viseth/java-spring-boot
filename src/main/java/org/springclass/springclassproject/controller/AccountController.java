@@ -2,6 +2,7 @@ package org.springclass.springclassproject.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springclass.springclassproject.annotation.LogAuditor;
 import org.springclass.springclassproject.controller.request.AccountCreateRequest;
 import org.springclass.springclassproject.controller.request.AccountUpdateRequest;
 import org.springclass.springclassproject.respository.entity.AccountEntity;
@@ -26,6 +27,7 @@ public class AccountController {
         return ResponseEntity.created(new URI("/accounts")).body(result);
     }
 
+    @LogAuditor
     @GetMapping
     public ResponseEntity<Page<AccountEntity>> getAllAccounts(@RequestParam(value = "holderName", required = false) String holderName) {
         if (holderName != null && !holderName.isBlank()) {
